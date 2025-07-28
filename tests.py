@@ -1,6 +1,7 @@
 from functions.get_files_info import get_files_info
 from functions.get_file_content import get_file_content
 from functions.write_file import write_file
+from functions.run_python_file import run_python_file
 
 
 def test_get_files_info():
@@ -43,7 +44,25 @@ def test_write_file():
         print(write_file(*args))
 
 
+def test_run_python_file():
+    test_cases = [
+        ["calculator", "main.py"],
+        ["calculator", "main.py", ["3 + 5"]],
+        ["calculator", "tests.py"],
+        ["calculator", "../main.py"],
+        ["calculator", "nonexistent.py"],
+    ]
+    for args in test_cases:
+        if len(args) == 2:
+            print(f"Running '{args[1]}' with no args:")
+        if len(args) == 3:
+            print(f"Running '{args[1]}' with args {args[2]}:")
+        print(run_python_file(*args))
+        
+
+
 if __name__ == "__main__":
     #test_get_files_info()
     #test_get_file_content()
-    test_write_file()
+    #test_write_file()
+    test_run_python_file()
